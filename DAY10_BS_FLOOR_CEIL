@@ -1,0 +1,28 @@
+pair<int, int> getFloorAndCeil(vector<int> &a, int n, int x) {
+    int low = 0, high = n - 1;
+    int floor = -1, ceiling = -1;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+
+        // If x is equal to the middle element, floor and ceiling are both mid.
+        if (a[mid] == x) {
+            return {a[mid], a[mid]};
+        }
+        
+        // Check for floor
+        if (a[mid] < x) {
+            floor = a[mid];   // Update floor if a[mid] is less than x
+            low = mid + 1;    // Move to the right to find a larger value ≤ x
+        }
+        // Check for ceiling
+        else {
+            ceiling = a[mid];  // Update ceiling if a[mid] is greater than x
+            high = mid - 1;    // Move to the left to find a smaller value ≥ x
+        }
+    }
+
+    return {floor, ceiling};
+}
+
+
